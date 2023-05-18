@@ -11,7 +11,7 @@ const pageCache = new CacheFirst({
   cacheName: 'page-cache',
   plugins: [
     new CacheableResponsePlugin({
-      statuses: [0, 200],
+      statuses: [200],
     }),
     new ExpirationPlugin({
       maxAgeSeconds: 30 * 24 * 60 * 60,
@@ -19,7 +19,7 @@ const pageCache = new CacheFirst({
   ],
 });
 
-warmStrategyCache, offlineFallback({
+warmStrategyCache({
   urls: ['/index.html', '/'],
   strategy: pageCache,
 });
@@ -33,7 +33,7 @@ registerRoute(
     cacheName: 'asset-cache',
     plugins: [
       new CacheableResponsePlugin({
-        statuses: [0, 200],
+        statuses: [200],
       }),
     ],
   })
